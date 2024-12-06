@@ -25,9 +25,9 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
-        User currentUser = userService.getAuthenticatedUser(); // Replace with your logic
+        User currentUser = userService.getUserById((patient.getUserId())); // Replace with your logic
         if (currentUser != null) {
-            return ResponseEntity.ok(service.addPatient(patient, currentUser));
+            return ResponseEntity.ok(service.addPatient(patient));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
