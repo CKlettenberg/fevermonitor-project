@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 public class UserService {
 
@@ -105,18 +107,9 @@ public class UserService {
         return "User with ID " + userId + " was not found";
     }
 
-    public User getUserById(String id) {
-        getAllUsers();
-        for (User user : getAllUsers()) {
-            if (user.getId().equals(id)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    public String getUserById(int userId) {
-        return "User ID: " + userId;
+    public User getUserById(Long userId) {
+        Optional<User> user =  userRepository.findById(userId);
+        return user.orElse(null);
     }
 
     public String getFullName(String firstName, String lastName) {

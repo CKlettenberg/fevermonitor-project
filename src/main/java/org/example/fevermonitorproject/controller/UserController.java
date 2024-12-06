@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
     private final UserService userService;
@@ -19,17 +20,6 @@ public class UserController {
     public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
-    }
-
-    @GetMapping("/user/byid/{id}")
-    public User getUserById(@PathVariable("id") Long id) {
-        getAllUsers();
-        for (User user : userRepository.findAll()) {
-            if (user.getId().equals(id)) {
-                return user;
-            }
-        }
-        return null;
     }
 
     @GetMapping("/user/hello")
@@ -43,18 +33,13 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public String getUserById(@PathVariable("id") int userId) {
+    public User getUserById(@PathVariable("id") Long userId) {
         return userService.getUserById(userId);
     }
 
     @GetMapping("/{name}")
     public String getUserByName(@PathVariable("name") String userName) {
         return userService.getUserByName(userName);
-    }
-
-    @GetMapping("/users/by-id/{id}")
-    public User getUserById(@PathVariable String id) {
-        return userService.getUserById(id);
     }
 
     @GetMapping("/fullname")

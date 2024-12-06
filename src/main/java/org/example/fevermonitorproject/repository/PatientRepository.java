@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
-    List<Patient> findByOwnerId(Long ownerId);
+    List<Patient> findByUserId(Long userId);
 }

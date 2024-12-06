@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,8 @@ public class PatientService {
     private PatientRepository repository;
 
     // Add a new patient
-    public Patient addPatient(Patient patient, User owner) {
-        patient.setOwner(owner); // Set the owner
+    public Patient addPatient(Patient patient) {
+        // Set the owner
         return repository.save(patient);
     }
     // View all patients
@@ -53,7 +54,7 @@ public class PatientService {
         });
     }
     public List<Patient> getPatientsByUser(Long userId) {
-        return repository.findByOwnerId(userId);
+       return repository.findByUserId(userId);
     }
 
 }

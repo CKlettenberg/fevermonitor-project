@@ -30,10 +30,8 @@ public class Patient {
     @Setter
     private LocalDateTime closedAt;
 
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // Link to the User table
-    private User owner;
+
+    private Long userId;
 
     public Patient() {
         this.createdAt = LocalDateTime.now(); // Automatically set the createdAt timestamp
